@@ -21,7 +21,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip virtualenv
 
 # Install the Google-built interpreters
-ADD interpreters.tar.gz /
+RUN xargs --args-file=/workspace/packages.txt dpkg --install
 
 # Add Google-built interpreters to the path
 ENV PATH /opt/python3.5/bin:/opt/python3.6/bin:$PATH

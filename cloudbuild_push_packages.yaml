@@ -1,0 +1,15 @@
+steps:
+- # Copy package list and packages back to workspace.
+  # 'gsutil` expands filename wildcards like *, '/bin/cp' does not, thus we
+  # explicitly call out to '/bin/bash'.
+  name: ${_DOCKER_NAMESPACE}/python/interpreter-builder:${_TAG}
+  args: ['/bin/bash', '-c',
+         'cp /opt/packages/packages.txt /opt/packages/gcp-python*.deb /workspace/']
+- # Copy packages list and packages to GCS
+  name: gcr.io/cloud-builders/gsutil:latest
+  args: [
+    'cp', '/workspace/packages.txt', '/workspace/gcp-python*.deb',
+    '${_PACKAGE_BUCKET}'
+    ]
+images: [
+]
