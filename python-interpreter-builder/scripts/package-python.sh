@@ -50,6 +50,7 @@ echo "2.0" >debian-binary
 mkdir -p "${PACKAGE_DIR}"
 ar rcD "${PACKAGE_DIR}/${DEB_FILENAME}" \
   debian-binary control.tar.gz data.tar.gz
+rm debian-binary control.tar.gz data.tar.gz
 
 # Validate .deb
 dpkg --install --dry-run "${PACKAGE_DIR}/${DEB_FILENAME}"
